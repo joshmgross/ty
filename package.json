@@ -21,6 +21,8 @@
 		"wrangler": "^4.16.1"
 	},
 	"dependencies": {
-		"@types/node": "^22.15.21"
+		"@types/node": "^22.15.21",
+		"discord-interactions": "^4.3.0",
+		"itty-router": "^5.0.18"
 	}
 }
