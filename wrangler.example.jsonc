@@ -1,0 +1,19 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "ty",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-05-25",
+	"observability": {
+		"enabled": true
+	},
+	"hyperdrive": [
+		{
+			"binding": "HYPERDRIVE",
+			"id": "CLOUDFLARE_HYPERDRIVE_ID"
+		}
+	]
+}
