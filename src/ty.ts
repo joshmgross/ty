@@ -1,4 +1,8 @@
-import { createConnection, ResultSetHeader } from "mysql2/promise";
+import { createConnection, ResultSetHeader, RowDataPacket } from "mysql2/promise";
+
+interface Count extends RowDataPacket {
+  count: number;
+}
 
 export async function thank(interaction: any, env: Env): Promise<string> {
   const sender = interaction.member?.user?.id;
@@ -38,21 +42,34 @@ export async function thank(interaction: any, env: Env): Promise<string> {
     disableEval: true,
   });
 
+  let count = 0;
   try {
     // query instead of execute must be used as Hyperdrive does not support prepared statements
     const [result] = await connection.query<ResultSetHeader>(
-      "INSERT INTO thanks (sender_id, receiver_id, message) VALUES (?, ?, ?)",
+      "INSERT INTO `thanks` (`sender_id`, `receiver_id`, `message`) VALUES (?, ?, ?)",
       [sender, person, message]
     );
 
     if (result.affectedRows === 0) {
       return "Failed to record thanks";
     }
+
+    const [countResult] = await connection.query<Count[]>(
+      "SELECT COUNT(*) AS count FROM `thanks` WHERE `receiver_id` = ?",
+      [person]
+    );
+    count = countResult[0].count;
   } catch (error) {
     console.error("Database error:", error);
     return "Database error";
   } finally {
     await connection.end();
   }
-  return `<@${sender}> thanked <@${person}>: ${message}`;
+
+  if (!count) {
+    return `<@${sender}> thanked <@${person}>: "${message}"`;
+  }
+
+  return `<@${sender}> thanked <@${person}>: "${message}"
+<@${person}> has now been thanked ${count} time${count === 1 ? "" : "s"}!`;
 }
