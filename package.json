@@ -4,7 +4,7 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"deploy": "wrangler deploy",
+		"deploy": "script/setup-wrangler && wrangler deploy",
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
 		"test": "vitest",
@@ -23,6 +23,7 @@
 	"dependencies": {
 		"@types/node": "^22.15.21",
 		"discord-interactions": "^4.3.0",
-		"itty-router": "^5.0.18"
+		"itty-router": "^5.0.18",
+		"mysql2": "^3.14.1"
 	}
 }

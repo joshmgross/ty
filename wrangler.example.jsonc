@@ -7,6 +7,9 @@
 	"name": "ty",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-05-25",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
 	"observability": {
 		"enabled": true
 	},

@@ -1,6 +1,7 @@
 import { InteractionResponseType, InteractionType, verifyKey } from "discord-interactions";
 import { AutoRouter, IRequest } from "itty-router";
 import { TY_COMMAND } from "./commands";
+import { thank } from "./ty";
 
 const router = AutoRouter()
 
@@ -23,8 +24,9 @@ router.post('/', async (request, env) => {
 		case InteractionType.APPLICATION_COMMAND:
 			switch (interaction.data.name.toLowerCase()) {
 				case TY_COMMAND.name:
+					const response = await thank(interaction, env);
 					return new Response(
-						JSON.stringify({ type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE, data: { content: "You're welcome!" } }),
+						JSON.stringify({ type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE, data: { content: response } }),
 						{ headers: { 'Content-Type': 'application/json' } }
 					);
 				default:
