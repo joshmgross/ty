@@ -6,7 +6,7 @@ A Discord Bot to show some thanks
 
 1. A Cloudflare account for the Workers
 1. A Discord app with the permissions to send messages and use slash commands
-    * See [configuration instructions from the Discord sample](https://discord.com/developers/applications)
+    * See [configuration instructions from the Discord sample](https://github.com/discord/cloudflare-sample-app#configuring-project)
     * The "Interactions Endpoint URL" under "General Information" should be set to your CF Workers URL
 
 ## Configuration
@@ -44,16 +44,17 @@ npx wrangler secret put DISCORD_TOKEN
 
 ### PlanetScale
 
-Create a PlanetScale database using your preferred method of choice.
+Create a PlanetScale database named `ty` using your preferred method of choice.
 
 https://planetscale.com/docs/tutorials/planetscale-quick-start-guide
+
+Run the commands in `schema.sql` in a `pscale shell` or Web Console to set up your database.
 
 ### Cloudflare Hyperdrive
 
 [Docs](https://developers.cloudflare.com/hyperdrive/examples/connect-to-mysql/mysql-database-providers/planetscale/)
 
 Create a `read/write` password in Planetscale for your database and save the connection URL in `.dev.vars`
-
 
 ```yaml
 DATABASE_URL=
