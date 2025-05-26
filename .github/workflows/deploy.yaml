@@ -29,6 +29,10 @@ jobs:
         env:
           CLOUDFLARE_HYPERDRIVE_ID: ${{ secrets.CLOUDFLARE_HYPERDRIVE_ID }}
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 23
+      - run: npm install
       - run: npm run cf-typegen
 
       - name: Build & Deploy Worker
